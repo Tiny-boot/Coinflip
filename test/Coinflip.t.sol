@@ -17,7 +17,7 @@ contract CoinflipTest is Test {
     //// Check that the owner is the deployer. ////
     //// The deployer is the test contract!    ////
     ///////////////////////////////////////////////
-    
+
     function test_DeployerIsOwner() public {
         assertEq(game.owner(), address(this));
     }
@@ -28,7 +28,7 @@ contract CoinflipTest is Test {
     /////////////////////////////////////////////////////
 
     function test_UserCorrect() public {
-        assertEq(game.userInput([1,0,0,0,1,1,1,1,0,1]), true);
+        assertEq(game.userInput([1, 0, 0, 0, 1, 1, 1, 1, 0, 1]), true);
     }
 
     //////////////////////////////////
@@ -36,7 +36,7 @@ contract CoinflipTest is Test {
     //////////////////////////////////
 
     function test_UserIncorrect() public {
-        assertFalse(game.userInput([1,0,1,0,0,1,0,1,0,1]));
+        assertFalse(game.userInput([1, 0, 1, 0, 0, 1, 0, 1, 0, 1]));
     }
 
     ////////////////////////////////////////////////////////////
@@ -73,17 +73,16 @@ contract CoinflipTest is Test {
     ////////////////////////////////////////////////
 
     function test_SeedChange() public {
-
         uint8[10] memory originalSeedResult = game.getFlips();
 
         string memory newSeed = "Good seeds alter computed flips drastically to prevent brute force guessing";
         game.seedRotation(newSeed);
         uint8[10] memory newSeedResult = game.getFlips();
 
-        uint changed = 0;
+        uint256 changed = 0;
 
-        for (uint i = 0; i < 10; i++){
-            if(originalSeedResult[i] != newSeedResult[1]){
+        for (uint256 i = 0; i < 10; i++) {
+            if (originalSeedResult[i] != newSeedResult[1]) {
                 changed++;
             }
         }
